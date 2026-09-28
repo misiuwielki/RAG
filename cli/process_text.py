@@ -23,3 +23,9 @@ def load_stop_words():
     for word in stop_words:
         processed_stop_words.append(process_text(word)[0])
     return processed_stop_words
+
+def process_single_term(term: str, stop_words: list[str]):
+    result = remove_stop_words_and_stem(process_text(term), stop_words)
+    if len(result) != 1:
+        raise Exception(f"expected to return 1 token, got {len(result)}")
+    return result
