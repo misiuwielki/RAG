@@ -4,13 +4,6 @@ from utils import search_for_tokens
 from inverted_index import InvertedIndex
 from constants import BM25_K1, BM25_B
 
-def has_matching_tokens(query_tokens: list[str], title_tokens: list[str]) -> bool:
-    for q_token in query_tokens:
-        for t_token in title_tokens:
-            if q_token in t_token:
-                return True
-    return False
-
 def load_index_and_process_term_to_token(index: InvertedIndex, term: str):
     try:
         index.load()
@@ -41,8 +34,8 @@ def main() -> None:
     subparsers.add_parser("tfidf", help="Check TF-IDF of term in document by id", parents=[id_parser, term_parser])
     subparsers.add_parser("bm25idf", help="Check BM25 IDF for term", parents=[term_parser])
     bm25tf = subparsers.add_parser("bm25tf", help="Check BM25 TF of term in document by id, with customizable K1", parents=[id_parser, term_parser])
-    bm25tf.add_argument("k1", type=float, nargs="?", default=BM25_K1, help="Tunable BM25 K1 parameter")
-    bm25tf.add_argument("b", type=float, nargs="?", default=BM25_B, help="Tunable BM25 B parameter")
+    bm25tf.add_argument("--k1", type=float, default=BM25_K1, help="Tunable BM25 K1 parameter")
+    bm25tf.add_argument("--b", type=float, default=BM25_B, help="Tunable BM25 B parameter")
     bm25search_parser = subparsers.add_parser("bm25search", help="Search movies using full BM25 scoring")
     bm25search_parser.add_argument("query", type=str, help="Search query")
     bm25search_parser.add_argument("limit", type=int, nargs="?", default=5, help="Controls amount of results")
