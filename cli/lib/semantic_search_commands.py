@@ -1,5 +1,5 @@
 from lib.semantic_search import SemanticSearch, ChunkedSemanticSearch
-from utils import load_movies
+from lib.utils import load_movies
 
 
 def verify_model():

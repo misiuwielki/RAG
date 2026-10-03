@@ -1,8 +1,8 @@
 import argparse, sys, math
-from process_text import process_text, remove_stop_words_and_stem, process_single_term
-from utils import search_for_tokens
-from inverted_index import InvertedIndex
-from constants import BM25_K1, BM25_B
+from lib.process_text import process_text, remove_stop_words_and_stem, process_single_term
+from lib.utils import search_for_tokens
+from lib.inverted_index import InvertedIndex
+from lib.constants import BM25_K1, BM25_B
 
 def load_index_and_process_term_to_token(index: InvertedIndex, term: str):
     try:

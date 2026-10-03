@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 from typing import TypedDict
 import numpy as np, os, json
-from utils import Movie
+from lib.utils import Movie
 from lib.semantic_search_utils import cosine_similarity, semantic_chunk_command
 
 

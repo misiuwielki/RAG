@@ -1,7 +1,7 @@
 import json
 from typing import TypedDict, TYPE_CHECKING
 if TYPE_CHECKING:
-    from inverted_index import InvertedIndex
+    from lib.inverted_index import InvertedIndex
 
 class Movie(TypedDict):
     id: int

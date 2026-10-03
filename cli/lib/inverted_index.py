@@ -1,6 +1,6 @@
 import pickle, os, math
-from process_text import process_text, remove_stop_words_and_stem, load_stop_words
-from utils import load_movies, Movie, MovieData, search_for_tokens
+from lib.process_text import process_text, remove_stop_words_and_stem, load_stop_words
+from lib.utils import load_movies, Movie, MovieData, search_for_tokens
 from collections import Counter
 
 class InvertedIndex:
