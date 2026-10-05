@@ -12,3 +12,5 @@ wheels/
 # Large
 data/
 cache/
+# Private
+.env
