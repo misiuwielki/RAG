@@ -61,9 +61,12 @@ class HybridSearch:
         return final_sorted
             
 
-    def rrf_search(self, query: str, k: int, limit: int = 10) -> list[RRFSearchResult]:
+    def rrf_search(self, query: str, k: int, limit: int = 10, debug: bool = False) -> list[RRFSearchResult]:
         bm25_results = self._bm25_search(query, limit * 50)
         semantic_results = self.semantic_search.search_chunks(query, limit * 50)
+        if debug:
+            print(f"Keyword search results: '{", ".join([self.idx.docmap[t]['title'] for t in bm25_results])}'")
+            print(f"Semantic search results: '{", ".join(r['title'] for r in semantic_results)}'")
         final_results: dict[int, RRFSearchResult] = {}
         for rank, id in enumerate(bm25_results, start=1):
             rrf = rrf_score(rank, k)
@@ -121,7 +124,9 @@ def weighted_search_command(query: str, alpha: float=0.5, limit: int = 5):
     hybrid = HybridSearch(movies)
     return hybrid.weighted_search(query, alpha, limit)
 
-def rrf_search_command(query: str, k: int = 60, limit: int = 5):
+def rrf_search_command(query: str, k: int = 60, limit: int = 5, debug:bool = False):
+    if debug:
+        print(f"Modified query:'{query}'")
     movies = load_movies()["movies"]
     hybrid = HybridSearch(movies)
-    return hybrid.rrf_search(query, k, limit)
+    return hybrid.rrf_search(query, k, limit, debug)

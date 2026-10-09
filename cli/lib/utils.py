@@ -2,6 +2,8 @@ import json
 from typing import TypedDict, TYPE_CHECKING
 if TYPE_CHECKING:
     from lib.inverted_index import InvertedIndex
+    from lib.hybrid_search import RRFSearchResult
+    from lib.reranking import RerankedRRF
 
 class Movie(TypedDict):
     id: int
@@ -29,3 +31,9 @@ def search_for_tokens(input: list[str], index: "InvertedIndex", list_length: int
         if list_length is not None and len(search_result) >= list_length:
             break
     return search_result
+
+def format_results(search_result:list["RRFSearchResult"] | list["RerankedRRF"]):
+    results:list[str] = []
+    for movie in search_result:
+        results.append(f"{movie['title']} - {movie['description']}")
+    return results
